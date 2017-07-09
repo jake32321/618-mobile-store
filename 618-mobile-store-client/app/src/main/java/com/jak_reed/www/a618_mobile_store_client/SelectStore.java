@@ -1,5 +1,6 @@
 package com.jak_reed.www.a618_mobile_store_client;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -22,9 +24,6 @@ public class SelectStore extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_store);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.logo);
 
         vapeVideo = (VideoView) findViewById(R.id.videoView);
         whichStore = (TextView) findViewById(R.id.whichStoreText);
@@ -33,7 +32,7 @@ public class SelectStore extends AppCompatActivity {
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
         whichStore.setTypeface(typeface);
-        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vapevidback);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vape);
 
         vapeVideo.setVideoURI(uri);
         vapeVideo.start();
@@ -48,14 +47,14 @@ public class SelectStore extends AppCompatActivity {
         aILButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(SelectStore.this ,JuiceViewActivity.class));
             }
         });
 
         cILButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                startActivity(new Intent(SelectStore.this ,JuiceViewActivity.class));
             }
         });
     }
