@@ -47,14 +47,18 @@ public class SelectStore extends AppCompatActivity {
         aILButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectStore.this ,JuiceViewActivity.class));
+                Intent anna = new Intent(SelectStore.this, JuiceViewActivity.class);
+                anna.putExtra("store", "anna");
+                startActivity(anna);
             }
         });
 
         cILButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectStore.this ,JuiceViewActivity.class));
+                Intent carbondale = new Intent(SelectStore.this, JuiceViewActivity.class);
+                carbondale.putExtra("store", "carbondale");
+                startActivity(carbondale);
             }
         });
     }

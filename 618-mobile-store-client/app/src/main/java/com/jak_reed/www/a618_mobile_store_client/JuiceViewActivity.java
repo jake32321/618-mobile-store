@@ -8,18 +8,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 public class JuiceViewActivity extends AppCompatActivity {
 
     VideoView vapeVideo;
+    TextView storeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juice_view);
 
+        Bundle sentData = getIntent().getExtras();
+        String store = sentData.getString("store");
+
         vapeVideo = (VideoView) findViewById(R.id.vapeVideoView);
+        storeName = (TextView) findViewById(R.id.storeName);
+
+        if (store != null) {
+            if (store.equals("carbondale")){
+                storeName.setText("Carbondale, IL");
+            } else {
+                storeName.setText("Anna, IL");
+            }
+        } else {
+//            Toast.makeText(this, "Error: Could not find the store named " + store,
+//                    Toast.LENGTH_LONG).show();
+        }
+
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vape);
 
         vapeVideo.setVideoURI(uri);
