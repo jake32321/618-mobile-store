@@ -34,8 +34,8 @@ public class JuiceViewActivity extends AppCompatActivity {
                 storeName.setText("Anna, IL");
             }
         } else {
-//            Toast.makeText(this, "Error: Could not find the store named " + store,
-//                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error: Could not find the store named " + store,
+                    Toast.LENGTH_LONG).show();
         }
 
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vape);
