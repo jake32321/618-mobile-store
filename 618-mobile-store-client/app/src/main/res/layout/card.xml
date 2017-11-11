@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
+            app:layout_constraintGuide_percent="0.67" />
 
         <android.support.constraint.Guideline
             android:id="@+id/cardHor"
@@ -38,13 +38,15 @@
 
         <TextView
             android:id="@+id/juiceNameCard"
-            android:layout_width="159dp"
+            android:layout_width="215dp"
             android:layout_height="52dp"
             android:layout_marginBottom="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            android:textAlignment="center"
             android:paddingTop="12sp"
+            android:text="juice-name"
+            android:textAlignment="center"
+            android:background="@drawable/text_backgrnd"
+            android:textColor="#fff"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cardVert"
             app:layout_constraintHorizontal_bias="0.437"
@@ -54,19 +56,20 @@
 
         <TextView
             android:id="@+id/juiceSizeCard"
-            android:layout_width="159dp"
+            android:layout_width="90dp"
             android:layout_height="52dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/text_backgrnd"
             android:paddingTop="12sp"
-            android:text="TextView"
+            android:text="000 ml"
             android:textAlignment="center"
+            android:textColor="#fff"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintStart_toStartOf="@+id/cardVert"
             app:layout_constraintTop_toTopOf="@+id/cardHor"
             app:layout_constraintVertical_bias="1.0" />
