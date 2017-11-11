@@ -14,10 +14,12 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class JuiceViewActivity extends AppCompatActivity {
@@ -68,21 +70,35 @@ public class JuiceViewActivity extends AppCompatActivity {
             }
         });
 
-        dbRef.addValueEventListener(new ValueEventListener() {
+        Query query = dbRef.limitToLast(100);
+
+        ChildEventListener childEventListener = new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "onDataChange: " + ds.getValue());
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d(TAG, "onChildAdded: childAdded");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.d(TAG, "onChildChanged: ");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(JuiceViewActivity.this,
-                        "Error: Could not gather data from Firebase!",
-                        Toast.LENGTH_LONG).show();
+
             }
-        });
+        };
+        query.addChildEventListener(childEventListener);
     }
 
     @Override
