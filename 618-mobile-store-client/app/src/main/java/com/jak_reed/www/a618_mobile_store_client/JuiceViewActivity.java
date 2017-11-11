@@ -71,8 +71,8 @@ public class JuiceViewActivity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    Log.d(TAG, "onDataChange: "+ds.getValue().toString());
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "onDataChange: " + ds.getValue());
                 }
             }
 
