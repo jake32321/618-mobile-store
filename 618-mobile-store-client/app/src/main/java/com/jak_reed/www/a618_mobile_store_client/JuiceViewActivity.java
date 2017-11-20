@@ -65,7 +65,7 @@ public class JuiceViewActivity extends AppCompatActivity {
 
         dbRef = db.getReference("juice").child(store);
 
-        juiceRecView.setLayoutManager(new LinearLayoutManager(this));
+        juiceRecView.setLayoutManager(new GridLayoutManager(this, 3));
 
         FirebaseRecyclerAdapter<Juice, JuiceHolder> adapter = new FirebaseRecyclerAdapter<Juice, JuiceHolder>(Juice.class, R.layout.card, JuiceHolder.class, dbRef) {
             @Override
