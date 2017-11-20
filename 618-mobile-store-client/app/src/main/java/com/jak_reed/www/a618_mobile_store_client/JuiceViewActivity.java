@@ -8,12 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -99,6 +103,23 @@ public class JuiceViewActivity extends AppCompatActivity {
             }
         };
         query.addChildEventListener(childEventListener);
+
+        FirebaseRecyclerOptions<Juice> options = new FirebaseRecyclerOptions.Builder<Juice>()
+                .setQuery(query, Juice.class)
+                .build();
+
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Juice, JuiceHolder>(options) {
+            @Override
+            protected void onBindViewHolder(JuiceHolder holder, int position, Juice model) {
+                
+            }
+
+            @Override
+            public JuiceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card, parent, false);
+                return new JuiceHolder(view);
+            }
+        };
     }
 
     @Override
