@@ -9,23 +9,25 @@ import java.net.URL;
 
 public class Juice {
 
-    private String jName;
-    private String jSize;
-    private String juicePictureURL;
+    private String name;
+    private String size;
+    private String pictureURL;
 
-    public Juice(String name, String size, String uri){
-        this.jName = name;
-        this.jSize = size;
-        this.juicePictureURL = uri;
+    public Juice() {}
+
+    public Juice(String name, String size, String pictureURL){
+        this.name = name;
+        this.size = size;
+        this.pictureURL = pictureURL;
     }
 
     public String getName() {
-        return this.jName;
+        return this.name;
     }
 
-    public String getjSize(){
-        return this.jSize;
+    public String getSize(){
+        return this.size;
     }
 
-    public String getJuiceURL() { return  this.juicePictureURL; }
+    public  String getPictureURL() { return this.pictureURL; }
 }

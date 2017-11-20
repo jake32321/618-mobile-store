@@ -6,7 +6,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +20,6 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +35,7 @@ public class JuiceViewActivity extends AppCompatActivity {
     RecyclerView juiceRecView;
     FirebaseDatabase db;
     DatabaseReference dbRef;
+    FirebaseRecyclerAdapter adapter;
 
     final String TAG = "JuiceViewActivity";
 
@@ -62,6 +65,19 @@ public class JuiceViewActivity extends AppCompatActivity {
 
         dbRef = db.getReference("juice").child(store);
 
+        juiceRecView.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerAdapter<Juice, JuiceHolder> adapter = new FirebaseRecyclerAdapter<Juice, JuiceHolder>(Juice.class, R.layout.card, JuiceHolder.class, dbRef) {
+            @Override
+            protected void populateViewHolder(JuiceHolder viewHolder, Juice model, int position) {
+                viewHolder.setName(model.getName());
+                viewHolder.setSize(model.getSize());
+                viewHolder.setJuiceImage(model.getPictureURL());
+            }
+        };
+
+        juiceRecView.setAdapter(adapter);
+
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vape);
 
         vapeVideo.setVideoURI(uri);
@@ -73,53 +89,6 @@ public class JuiceViewActivity extends AppCompatActivity {
                 mp.setLooping(true);
             }
         });
-
-        Query query = dbRef.limitToLast(100);
-
-        ChildEventListener childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG, "onChildAdded: childAdded");
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG, "onChildChanged: ");
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        query.addChildEventListener(childEventListener);
-
-        FirebaseRecyclerOptions<Juice> options = new FirebaseRecyclerOptions.Builder<Juice>()
-                .setQuery(query, Juice.class)
-                .build();
-
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Juice, JuiceHolder>(options) {
-            @Override
-            protected void onBindViewHolder(JuiceHolder holder, int position, Juice model) {
-                
-            }
-
-            @Override
-            public JuiceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card, parent, false);
-                return new JuiceHolder(view);
-            }
-        };
     }
 
     @Override

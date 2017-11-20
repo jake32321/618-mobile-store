@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.net.URI;
 
 /**
  * Created by Jacob Reed on 11/11/2017.
@@ -16,34 +15,28 @@ import java.net.URI;
 
 public class JuiceHolder extends RecyclerView.ViewHolder {
 
+    private final ImageView juiceImage;
     private final TextView juiceName;
     private final TextView juiceSize;
-    private final ImageView juiceImage;
     private Context context;
 
     public JuiceHolder(View view) {
         super(view);
-        this.juiceName = (TextView) view.findViewById(R.id.juiceNameCard);
-        this.juiceSize = (TextView) view.findViewById(R.id.juiceSizeCard);
-        this.juiceImage = (ImageView) view.findViewById(R.id.juiceImage);
+        juiceName = (TextView) view.findViewById(R.id.juiceNameCard);
+        juiceSize = (TextView) view.findViewById(R.id.juiceSizeCard);
+        juiceImage = (ImageView) view.findViewById(R.id.juiceImage);
         this.context = view.getContext();
     }
 
-    public void bind(Juice juice){
-        setName(juice.getName());
-        setSize(juice.getjSize());
-        setImage(juice.getJuiceURL());
+    public void setName(String name){
+        juiceName.setText(name);
     }
 
-    private void setName(String name){
-        this.juiceName.setText(name);
+    public void setSize(String size) {
+        juiceSize.setText(size+" ml");
     }
 
-    private void setSize(String size){
-        this.juiceSize.setText(size+" ml");
-    }
-
-    private  void setImage(String url){
-        Picasso.with(this.context).load(url).into(this.juiceImage);
+    public void setJuiceImage(String url) {
+        Picasso.with(this.context).load(url).fit().centerCrop().into(this.juiceImage);
     }
 }
